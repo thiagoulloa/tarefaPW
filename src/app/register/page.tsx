@@ -1,38 +1,28 @@
 "use client";
-import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useContent } from "./lib/content-context";
-import { MotionButton } from "./ui/Button";
+import { useState } from "react";
+import { MotionButton } from "../ui/Button";
 
-export default function Home() {
-  const router = useRouter();
-  const { setUser } = useContent();
+export default function RegisterPage() {
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async () => {
-    console.log(email, senha);
+  const handleRegister = async () => {
     setIsLoading(true);
-
     try {
-      const response = await fetch("/api/users/login", {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, senha }),
+        body: JSON.stringify({ email, password }),
       });
-
       if (response.ok) {
-        const data = await response.json();
-        console.log("Usuário logado com sucesso!", data.user);
-        setUser(await data.user.id);
-        router.push("/notes");
+        console.log("Usuário registrado com sucesso!");
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -52,19 +42,17 @@ export default function Home() {
           className="h-[8%] w-[40%] rounded-full px-5"
           placeholder="senha"
           type="password"
-          onChange={(e) => setSenha(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         ></input>
-
         <MotionButton
-          label={isLoading ? "Entrando..." : "Login"}
+          label={isLoading ? "Entrando..." : "Registrar"}
           className="rounded-full bg-white/60 w-[40%] h-[8%]"
-          func={handleLogin}
+          func={handleRegister}
           type="button"
         ></MotionButton>
-
-        <Link href="/register">
+        <Link href="/">
           <p className="text-white cursor-pointer">
-            Não possui uma conta? Clique aqui
+            Já possui uma conta? Clique aqui
           </p>
         </Link>
       </div>
