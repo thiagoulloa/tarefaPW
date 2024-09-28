@@ -2,24 +2,28 @@
 import Link from "next/link";
 import { useState } from "react";
 import { MotionButton } from "../ui/Button";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [senha, setSenha] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch("/api/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, senha }),
       });
       if (response.ok) {
         console.log("Usuário registrado com sucesso!");
+
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
@@ -42,11 +46,11 @@ export default function RegisterPage() {
           className="h-[8%] w-[40%] rounded-full px-5"
           placeholder="senha"
           type="password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setSenha(e.target.value)}
         ></input>
         <MotionButton
           label={isLoading ? "Entrando..." : "Registrar"}
-          className="rounded-full bg-white/60 w-[40%] h-[8%]"
+          className="rounded-full bg-white/60 w-[40%] h-[8%] flex justify-center"
           func={handleRegister}
           type="button"
         ></MotionButton>

@@ -23,7 +23,7 @@ export const POST = async (req) => {
   } catch (error) {
     return new Response(
       JSON.stringify({
-        msg: "Não foi possível, criar usuário",
+        msg: "Não foi possível criar usuário",
         error: error.message,
       }),
       {
