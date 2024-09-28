@@ -12,10 +12,6 @@ export default function AddNotePage() {
   const [desc, setDesc] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  function teste() {
-    console.log(user);
-  }
-
   const handleRegister = async () => {
     setIsLoading(true);
     try {
@@ -50,7 +46,7 @@ export default function AddNotePage() {
         onChange={(e) => setDesc(e.target.value)}
       ></textarea>
       <MotionButton
-        label={isLoading ? "Entrando..." : "Adicionar Nota"}
+        label={isLoading ? "Registrando..." : "Adicionar Nota"}
         type="button"
         func={handleRegister}
         className="bg-cyan-900 w-[40%] h-[4%] rounded-lg text-white"

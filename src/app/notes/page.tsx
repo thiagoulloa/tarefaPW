@@ -51,8 +51,8 @@ export default function Notes() {
       <div className="flex gap-5 items-center">
         <p>Minhas anotações</p>
         <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           className="w-7 h-7"
           onClick={() => router.push("/addNotePage")}
         >
@@ -68,6 +68,7 @@ export default function Notes() {
                   id={e.id}
                   titulo={e.titulo}
                   descricao={e.descricao}
+                  getNotes={getNotes}
                 />
               );
             })

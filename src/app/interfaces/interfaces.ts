@@ -10,6 +10,7 @@ interface NoteProps {
   id: number;
   titulo: string;
   descricao: string;
+  getNotes: () => void; // Adiciona o tipo da função getNotes
 }
 
 interface GetNotesProps {
